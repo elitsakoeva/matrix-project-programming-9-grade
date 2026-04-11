@@ -16,6 +16,9 @@ void print_menu();
 void print_options();
 
 void create_matrix(Matrix * matrix);
+void add_matrix_to_arr(Matrix * matrix);
+void display_matrices();
+void delete_matrix(int index);
 
 void matrix_addition(FUNCTION_PARAMETERS);
 void matrix_subtraction(FUNCTION_PARAMETERS);

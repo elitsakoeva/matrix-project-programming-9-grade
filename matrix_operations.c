@@ -1,4 +1,15 @@
+#include <stdio.h>
 #include "matrix.h"
+
+void print_options() {
+    printf("\n ============= OPTIONS: ============= \n");
+    printf("1. Add (+) (matrix1 + matrix2). \n");
+    printf("2. Subtract (-) (matrix1 - matrix2). \n");
+    printf("3. Dot product (*) (matrix1 * matrix2) (also known as multiplying). \n");
+    printf("4. Transpose (T) ( (matrix1)T ) (swapping rows and columns in a matrix). \n");
+    printf("5. Exit to previous menu. \n");
+    printf("\n ================================= \n");
+}
 
 void matrix_addition(FUNCTION_PARAMETERS){
     RES->rows = A->rows;

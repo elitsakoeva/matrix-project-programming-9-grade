@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "matrix.h"
 
+#define MAX_MATRICES 10
+
+extern Matrix matrices[MAX_MATRICES];
+extern int matrix_count;
 
 int main(void) {
 
@@ -13,26 +17,43 @@ int main(void) {
         do{
             printf("Enter your choice (1 - 5). \n");
             scanf("%d", &choice);
-        } while(choice < 1 || choice > 4);
+        } while(choice < 1 || choice > 5);
 
         if (choice == 1){
-            // дава опция на потребителя да въведе нова матрица
+            Matrix m;
+            create_matrix(&m);
+            add_matrix_to_arr(&m);
         }
 
         else if (choice == 2){
-            // принтират се всички записани матрици
+            display_matrices();
         }
 
         else if(choice == 3){
-            // трие се матрица по избор на потребителя (може би по име или номер?)
+            if(matrix_count == 0) {
+                printf("No matrices to delete. Go and add some. \n");
+                return;
+            }
+
+            int index;
+            do{
+                printf("Enter matrix number (the matrix will be deleted): \n");
+                scanf("%d", &index);
+            }while(index < 0 || index > matrix_count);
+
+            delete_matrix(index-1);
         }
 
         else if(choice == 4){
-            // показва се ново меню с операции
+            // показва се ново меню с операции 
+            print_options();
+            // ...............
+
         }
 
         else {
-            // прекратява програмата
+            printf("Program exited. \n");
+            break;
         }
         
     }
