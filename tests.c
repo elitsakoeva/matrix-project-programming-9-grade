@@ -4,14 +4,6 @@
 #define ROWS 3
 #define COLUMNS 3
 
-void print_matrix(Matrix * matrix) {
-    for(int i = 0; i < matrix->rows; i++) {
-        for(int j = 0; j < matrix->columns; j++)
-            printf("%d ", matrix->matrix[i][j]);
-        printf("\n");
-    }
-    printf("\n");
-}
 
 void test_number_one(){
     Matrix A = {
