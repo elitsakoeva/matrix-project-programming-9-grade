@@ -12,6 +12,8 @@ typedef struct {
 #define FUNCTION_PARAMETERS Matrix * A, Matrix * B, Matrix * RES
 #define FUNCTION_PARAMETERS_TRANSPOSE Matrix * A, Matrix * RES
 
+void print_menu();
+void print_options();
 
 void create_matrix(Matrix * matrix);
 

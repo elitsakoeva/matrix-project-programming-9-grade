@@ -2,54 +2,42 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-#define ROWS 3
-#define COLUMNS 3
-
-void print_matrix(Matrix * matrix) {
-    for(int i = 0; i < matrix->rows; i++) {
-        for(int j = 0; j < matrix->columns; j++)
-            printf("%d ", matrix->matrix[i][j]);
-        printf("\n");
-    }
-    printf("\n");
-}
 
 int main(void) {
 
-    Matrix A = {
-       ROWS,
-       COLUMNS,
-        {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 9}
+    int choice = 0;
+
+    while(1){
+        print_menu();
+
+        do{
+            printf("Enter your choice (1 - 5). \n");
+            scanf("%d", &choice);
+        } while(choice < 1 || choice > 4);
+
+        if (choice == 1){
+            // дава опция на потребителя да въведе нова матрица
         }
-    };
 
-
-    Matrix B = {
-       ROWS,
-       COLUMNS,
-        {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 9}
+        else if (choice == 2){
+            // принтират се всички записани матрици
         }
-    };
-    
-    Matrix RES;
 
-    matrix_addition(&A, &B, &RES);
-    print_matrix(&RES);
+        else if(choice == 3){
+            // трие се матрица по избор на потребителя (може би по име или номер?)
+        }
 
-    matrix_subtraction(&A, &B, &RES);
-    print_matrix(&RES);
+        else if(choice == 4){
+            // показва се ново меню с операции
+        }
 
-    matrix_multiplication(&A, &B, &RES);
-    print_matrix(&RES);
+        else {
+            // прекратява програмата
+        }
+        
+    }
 
-    matrix_transpose(&A, &RES);
-    print_matrix(&RES);
+
 
     return 0;
 }
