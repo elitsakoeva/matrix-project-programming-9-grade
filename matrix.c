@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "matrix.h"
 
 #define ROWS 3
 #define COLUMNS 3
 
-void print_matrix(int rows, int columns, int A[rows][columns]) {
-    for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < columns; j++)
-            printf("%d ", A[i][j]);
+void print_matrix(Matrix * matrix) {
+    for(int i = 0; i < matrix->rows; i++) {
+        for(int j = 0; j < matrix->columns; j++)
+            printf("%d ", matrix->matrix[i][j]);
         printf("\n");
     }
     printf("\n");
@@ -15,31 +16,40 @@ void print_matrix(int rows, int columns, int A[rows][columns]) {
 
 int main(void) {
 
-    int A[ROWS][COLUMNS] = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
+    Matrix A = {
+       ROWS,
+       COLUMNS,
+        {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        }
     };
 
-    int B[ROWS][COLUMNS] = {
-        {9, 8, 7},
-        {6, 5, 4},
-        {3, 2, 1}
+
+    Matrix B = {
+       ROWS,
+       COLUMNS,
+        {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        }
     };
+    
+    Matrix RES;
 
-    int RES[ROWS][COLUMNS];
+    matrix_addition(&A, &B, &RES);
+    print_matrix(&RES);
 
-    matrix_addition(ROWS, COLUMNS, A, B, RES);
-    print_matrix(ROWS, COLUMNS, RES);
+    matrix_subtraction(&A, &B, &RES);
+    print_matrix(&RES);
 
-    matrix_substraction(ROWS, COLUMNS, A, B, RES);
-    print_matrix(ROWS, COLUMNS, RES);
+    matrix_multiplication(&A, &B, &RES);
+    print_matrix(&RES);
 
-    matrix_multiplication(ROWS, COLUMNS, A, B, RES);
-    print_matrix(ROWS, COLUMNS, RES);
-
-    matrix_transpose(ROWS, COLUMNS, A, RES);
-    print_matrix(COLUMNS, ROWS, RES);
+    matrix_transpose(&A, &RES);
+    print_matrix(&RES);
 
     return 0;
 }
