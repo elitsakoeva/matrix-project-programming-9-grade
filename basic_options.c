@@ -89,7 +89,8 @@ void display_matrices() {
         printf("No matrices. \n");
         return;
     }
-
+    printf("All matrices: \n");
+    
     for(int i=0; i<matrix_count; i++){
         printf("\n Matrix %d \n", i+1);
         print_matrix(&matrices[i]);
@@ -97,6 +98,7 @@ void display_matrices() {
 }
 
 void delete_matrix(int index){
+    
     if(index < 0 || index >= matrix_count){
         printf("Invalid index. \n");
         return;

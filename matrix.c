@@ -33,6 +33,8 @@ int main(void) {
                 continue;
             }
 
+            display_matrices();
+
             int index;
             do{
                 printf("Enter matrix number (the matrix will be deleted): \n");
@@ -80,6 +82,7 @@ int main(void) {
                 }
 
                 matrix_addition(&matrices[m1 - 1], &matrices[m2 - 1], &res);
+                printf("\n RESULT MATRIX: \n");
                 print_matrix(&res);
                 
                 free_matrix(&res);
@@ -104,6 +107,7 @@ int main(void) {
                 }
 
                 matrix_subtraction(&matrices[m1 - 1], &matrices[m2 - 1], &res);
+                printf("\n RESULT MATRIX: \n");
                 print_matrix(&res);
 
                 free_matrix(&res);
@@ -128,6 +132,7 @@ int main(void) {
                 }
 
                 matrix_multiplication(&matrices[m1 - 1], &matrices[m2 - 1], &res);
+                printf("\n RESULT MATRIX: \n");
                 print_matrix(&res);
 
                 free_matrix(&res);
@@ -142,6 +147,7 @@ int main(void) {
                 }while(m1 < 1 || m1 > matrix_count);
 
                 matrix_transpose(&matrices[m1 - 1], &res);
+                printf("\n RESULT MATRIX: \n");
                 print_matrix(&res);
 
                 free_matrix(&res);
