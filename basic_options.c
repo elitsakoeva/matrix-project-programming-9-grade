@@ -112,7 +112,13 @@ void delete_matrix(int index){
 
     matrix_count--;
 
-    matrices = realloc(matrices, matrix_count * sizeof(Matrix));
+    if(matrix_count == 0){
+        free(matrices);
+        matrices = NULL;
+    }
+    else {
+        matrices = realloc(matrices, matrix_count * sizeof(Matrix));
+    }
 
     printf("Matrix deleted. \n");
 
