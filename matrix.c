@@ -21,6 +21,7 @@ int main(void) {
             Matrix m;
             create_matrix(&m);
             add_matrix_to_arr(&m);
+            free_matrix(&m);
         }
 
         else if (choice == 2){

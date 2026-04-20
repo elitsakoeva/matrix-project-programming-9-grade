@@ -62,7 +62,7 @@ void test_addition() {
     Matrix RES;
     matrix_addition(&A, &B, &RES);
 
-    ASSERT_TEST("Addition is working: ",
+    ASSERT_TEST("Addition is working",
         RES.matrix[0][0] == 2 &&
         RES.matrix[0][1] == 4 &&
         RES.matrix[0][2] == 6 &&
@@ -78,7 +78,7 @@ void test_subtraction() {
     Matrix RES;
     matrix_subtraction(&A, &B, &RES);
 
-    ASSERT_TEST("Subtraction is working: ",
+    ASSERT_TEST("Subtraction is working",
         RES.matrix[0][0] == 0 &&
         RES.matrix[0][1] == 0 &&
         RES.matrix[0][2] == 0 &&
@@ -94,7 +94,7 @@ void test_multiplication() {
     Matrix RES;
     matrix_multiplication(&A, &C, &RES);
 
-    ASSERT_TEST("Multiplication is working: ",
+    ASSERT_TEST("Multiplication is working",
         RES.matrix[0][0] == 22 &&   
         RES.matrix[0][1] == 28 &&
         RES.matrix[1][0] == 49 &&
@@ -109,7 +109,7 @@ void test_transpose() {
     Matrix RES;
     matrix_transpose(&A, &RES);
 
-    ASSERT_TEST("Transpose is working: ",
+    ASSERT_TEST("Transpose is working",
         RES.matrix[0][0] == 1 &&
         RES.matrix[1][0] == 2 &&
         RES.matrix[2][0] == 3 &&
@@ -125,7 +125,7 @@ void test_add_matrix_to_arr() {
     free_all_matrices();
 
     add_matrix_to_arr(&A);
-    ASSERT_TEST("Matrix 1 should be matrix A and the count should be 1: ", 
+    ASSERT_TEST("Matrix 1 should be matrix A and the count should be 1", 
         matrix_count == 1 && 
         matrices[0].matrix[0][0] == 1 &&
         matrices[0].matrix[0][1] == 2 &&
@@ -145,7 +145,7 @@ void test_delete_matrix() {
 
     delete_matrix(0);
 
-    ASSERT_TEST("Matrix 1 should be matrix C and the count should be 1: ", 
+    ASSERT_TEST("Matrix 1 should be matrix C and the count should be 1", 
         matrix_count == 1 && 
         matrices[0].matrix[0][0] == 1 &&
         matrices[0].matrix[0][1] == 2 &&
