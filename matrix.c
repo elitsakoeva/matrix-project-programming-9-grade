@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-#define MAX_MATRICES 10
-
-extern Matrix matrices[MAX_MATRICES];
+extern Matrix * matrices;
 extern int matrix_count;
 
 int main(void) {
@@ -32,14 +30,14 @@ int main(void) {
         else if(choice == 3){
             if(matrix_count == 0) {
                 printf("No matrices to delete. Go and add some. \n");
-                return;
+                continue;
             }
 
             int index;
             do{
                 printf("Enter matrix number (the matrix will be deleted): \n");
                 scanf("%d", &index);
-            }while(index < 0 || index > matrix_count);
+            }while(index < 1 || index > matrix_count);
 
             delete_matrix(index-1);
         }
@@ -83,7 +81,8 @@ int main(void) {
 
                 matrix_addition(&matrices[m1 - 1], &matrices[m2 - 1], &res);
                 print_matrix(&res);
-
+                
+                free_matrix(&res);
             }
 
             else if(option == 2){
@@ -106,6 +105,8 @@ int main(void) {
 
                 matrix_subtraction(&matrices[m1 - 1], &matrices[m2 - 1], &res);
                 print_matrix(&res);
+
+                free_matrix(&res);
             }
 
             else if(option == 3){
@@ -128,6 +129,8 @@ int main(void) {
 
                 matrix_multiplication(&matrices[m1 - 1], &matrices[m2 - 1], &res);
                 print_matrix(&res);
+
+                free_matrix(&res);
             }
 
             else if(option == 4){
@@ -140,6 +143,8 @@ int main(void) {
 
                 matrix_transpose(&matrices[m1 - 1], &res);
                 print_matrix(&res);
+
+                free_matrix(&res);
             }
 
             else{
@@ -149,6 +154,7 @@ int main(void) {
         }
 
         else {
+            free_all_matrices();
             printf("Program exited. \n");
             break;
         }

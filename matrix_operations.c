@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "matrix.h"
 
 void print_options() {
@@ -11,9 +12,27 @@ void print_options() {
     printf("\n ================================= \n");
 }
 
+void allocate_dmem_for_res(Matrix * res, int rows, int columns) {
+    res->rows = rows;
+    res->columns = columns;
+
+    res->matrix = malloc(rows * sizeof(int *));
+    if(res->matrix == NULL) {
+        printf("Error allocating memory.\n");
+        exit(1);
+    }
+
+    for(int i=0; i < rows; i++) {
+        res->matrix[i] = malloc(columns * sizeof(int));
+        if(res->matrix[i] == NULL) {
+            printf("Error allocating memory.\n");
+            exit(1);
+        }
+    }
+}
+
 void matrix_addition(FUNCTION_PARAMETERS){
-    RES->rows = A->rows;
-    RES->columns = A->columns;
+    allocate_dmem_for_res(RES, A->rows, A->columns);
 
     for(int i=0; i<A->rows; i++){
         for(int j=0; j<A->columns; j++){
@@ -23,8 +42,7 @@ void matrix_addition(FUNCTION_PARAMETERS){
 }
 
 void matrix_subtraction(FUNCTION_PARAMETERS) {
-    RES->rows = A->rows;
-    RES->columns = A->columns;
+    allocate_dmem_for_res(RES, A->rows, A->columns);
 
     for(int i=0; i<A->rows; i++){
         for(int j=0; j<A->columns; j++){
@@ -34,8 +52,7 @@ void matrix_subtraction(FUNCTION_PARAMETERS) {
 }
 
 void matrix_multiplication(FUNCTION_PARAMETERS){
-    RES->rows = A->rows;
-    RES->columns = B->columns;
+    allocate_dmem_for_res(RES, A->rows, B->columns);
 
     for(int i=0; i<A->rows; i++){
         for(int j=0; j<B->columns; j++){
@@ -48,8 +65,7 @@ void matrix_multiplication(FUNCTION_PARAMETERS){
 }
 
 void matrix_transpose(FUNCTION_PARAMETERS_TRANSPOSE){
-    RES->rows = A->columns;
-    RES->columns = A->rows;
+    allocate_dmem_for_res(RES, A->columns, A->rows);
 
     for(int i=0; i<A->rows; i++){
         for(int j=0; j<A->columns; j++){

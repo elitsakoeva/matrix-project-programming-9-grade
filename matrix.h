@@ -1,12 +1,10 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
-#define MAX_SIZE 10
-
 typedef struct {
     int rows;
     int columns;
-    int matrix[MAX_SIZE][MAX_SIZE];
+    int ** matrix;
 } Matrix;
 
 #define FUNCTION_PARAMETERS Matrix * A, Matrix * B, Matrix * RES
@@ -20,6 +18,10 @@ void add_matrix_to_arr(Matrix * matrix);
 void display_matrices();
 void delete_matrix(int index);
 
+void free_matrix(Matrix * matrix);
+void free_all_matrices();
+
+void allocate_dmem_for_res(Matrix * res, int rows, int columns);
 void matrix_addition(FUNCTION_PARAMETERS);
 void matrix_subtraction(FUNCTION_PARAMETERS);
 void matrix_multiplication(FUNCTION_PARAMETERS);

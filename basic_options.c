@@ -1,9 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "matrix.h"
 
-#define MAX_MATRICES 10
-
-Matrix matrices[MAX_MATRICES];
+Matrix * matrices = NULL;
 int matrix_count = 0;
 
 void print_menu() {
@@ -27,6 +26,20 @@ void create_matrix(Matrix * matrix){
         scanf("%d", &matrix->columns);
     } while(matrix->columns < 1);
 
+    matrix->matrix = malloc(matrix->rows * sizeof(int *));
+    if(matrix->matrix == NULL) {
+        printf("Error allocating memory. \n");
+        exit(1);
+    }
+
+    for(int i=0; i < matrix->rows; i++){
+        matrix->matrix[i] = malloc(matrix->columns * sizeof(int));
+        if(matrix->matrix[i] == NULL) {
+            printf("Error allocating memory. \n");
+            exit(1);
+        }
+    }
+
     printf("Enter the values in a matrix: \n");
     for(int i=0; i<matrix->rows; i++){
         for(int j=0; j<matrix->columns; j++){
@@ -37,12 +50,38 @@ void create_matrix(Matrix * matrix){
 }
 
 void add_matrix_to_arr(Matrix * matrix) {
-    if(matrix_count >= MAX_MATRICES){
-        printf("Storage full. \n");
-        return;
+    
+    Matrix * temp = realloc(matrices, (matrix_count + 1) * sizeof(Matrix));
+    if(temp== NULL) {
+        printf("Error reallocating memory.\n");
+        exit(1);
+    }
+    matrices = temp;
+
+    matrices[matrix_count].rows = matrix->rows;
+    matrices[matrix_count].columns = matrix->columns;
+
+    matrices[matrix_count].matrix = malloc(matrix->rows * sizeof(int *));
+    if(matrices[matrix_count].matrix == NULL) {
+        printf("Error allocating memory. \n");
+        exit(1);
     }
 
-    matrices[matrix_count++] = *matrix;
+    for(int i=0; i < matrix->rows; i++) {
+        matrices[matrix_count].matrix[i] = malloc(matrix->columns * sizeof(int));
+        if(matrices[matrix_count].matrix[i] == NULL) {
+            printf("Error allocating memory. \n");
+            exit(1);
+        }
+    }
+
+    for(int i=0; i< matrix->rows; i++) {
+        for(int j = 0; j< matrix->columns; j++) {
+            matrices[matrix_count].matrix[i][j] = matrix->matrix[i][j];
+        }
+    }
+
+    matrix_count++;
 }
 
 void display_matrices() {
@@ -63,11 +102,15 @@ void delete_matrix(int index){
         return;
     }
 
+    free_matrix(&matrices[index]);
+
     for(int i=index; i<matrix_count - 1; i++){
         matrices[i] = matrices[i+1];
     }
 
     matrix_count--;
+
+    matrices = realloc(matrices, matrix_count * sizeof(Matrix));
 
     printf("Matrix deleted. \n");
 
@@ -81,4 +124,22 @@ void print_matrix(Matrix * matrix) {
         printf("\n");
     }
     printf("\n");
+}
+
+void free_matrix(Matrix * matrix) {
+    for(int i=0; i<matrix->rows; i++) {
+        free(matrix->matrix[i]);
+    }
+    free(matrix->matrix);
+}
+
+void free_all_matrices() {
+    for(int i=0; i < matrix_count; i++) {
+        free_matrix(&matrices[i]);
+    }
+
+    free(matrices);
+    matrices = NULL;
+    
+    matrix_count = 0;
 }
